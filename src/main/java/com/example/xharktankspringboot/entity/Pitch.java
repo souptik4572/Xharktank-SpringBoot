@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,15 +24,12 @@ public class Pitch {
             strategy = GenerationType.SEQUENCE,
             generator = "pitch_sequence"
     )
-    private long id;
-    @Column(name = "entrepreneur_name")
+    private Long pitchId;
     private String entrepreneurName;
-    @Column(name = "pitch_title", unique = true)
+    @Column(unique = true)
     private String pitchTitle;
-    @Column(name = "pitch_idea", unique = true)
+    @Column(unique = true)
     private String pitchIdea;
-    @Column(name = "ask_amount")
     private Double askAmount;
-    @Column(name = "equity_percent")
     private Float equityPercent;
 }

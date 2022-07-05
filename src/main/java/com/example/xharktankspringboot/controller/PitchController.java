@@ -1,5 +1,6 @@
 package com.example.xharktankspringboot.controller;
 
+import com.example.xharktankspringboot.entity.CounterOffer;
 import com.example.xharktankspringboot.entity.Pitch;
 import com.example.xharktankspringboot.service.PitchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,11 @@ public class PitchController {
     public String deletePitch(@PathVariable("pitchId") Long pitchId) {
         pitchService.deletePitch(pitchId);
         return "Pitch has been deleted successfully";
+    }
+
+    @PutMapping("/{pitchId}/make-offer")
+    public String makeOfferOnPitch(@PathVariable("pitchId") Long pitchId,
+            @Valid @RequestBody CounterOffer counterOffer) {
+        return pitchService.addCounterOfferOnPitch(pitchId, counterOffer);
     }
 }
