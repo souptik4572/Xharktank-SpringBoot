@@ -1,8 +1,8 @@
 package com.example.xharktankspringboot.controller;
 
+import com.example.xharktankspringboot.domain.RestResponse;
 import com.example.xharktankspringboot.dto.ResponseDTO;
 import com.example.xharktankspringboot.dto.ResponseDTOUtil;
-import com.example.xharktankspringboot.domain.RestResponse;
 import com.example.xharktankspringboot.entity.CounterOffer;
 import com.example.xharktankspringboot.entity.Pitch;
 import com.example.xharktankspringboot.service.PitchService;
@@ -17,7 +17,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping(path = "/api/v1/pitches")
