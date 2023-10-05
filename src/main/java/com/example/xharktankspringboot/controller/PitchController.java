@@ -7,8 +7,6 @@ import com.example.xharktankspringboot.exception.ResourceNotFoundException;
 import com.example.xharktankspringboot.service.PitchService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,17 +32,13 @@ public class PitchController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<ResponseDTO> getAllPitches() {
-        try {
-            List<Pitch> pitches = pitchService.getAllPitches();
-            if (CollectionUtils.isEmpty(pitches)) {
-                return ResponseEntity.ok(createEmptySuccessResponse("No pitches found"));
-            }
-            return ResponseEntity.ok(createSuccessResponse(pitches, "Pitches fetched successfully"));
-        } catch (Exception ex) {
-            log.error(ex.getMessage());
-            return ResponseEntity.internalServerError().body(createErrorResponse("Error fetching pitches", HttpStatus.INTERNAL_SERVER_ERROR.value()));
+    public ResponseDTO getAllPitches() {
+        List<Pitch> pitches = pitchService.getAllPitches();
+        if (CollectionUtils.isEmpty(pitches)) {
+            throw new ResourceNotFoundException("pitch");
         }
+
+        return createSuccessResponse(pitches, OK);
     }
 
     @PutMapping("/")
